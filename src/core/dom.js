@@ -17,9 +17,13 @@ class Dom {
         this.html('')
         return this
     }
-
-    on() {
-        
+    // Добавляем элемент
+    on(eventType, callback) {
+        this.$el.addEventListener(eventType, callback)
+    }
+    // Удаляем элемент
+    off(eventType, callback) {
+        this.$el.removeEventListener(eventType, callback)
     }
 
     append(node) {
