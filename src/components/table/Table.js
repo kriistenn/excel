@@ -1,33 +1,25 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {createTable} from './table.template';
+import {resizeHendler} from './table.resize';
+import {shouldResize} from './table.function';
 
 export class Table extends ExcelComponent {
     static className = 'excel__table'
 
     constructor($root) {
         super($root, {
-            listeners: ['click', 'mousedown', 'mousemove', 'mouseup']
+            listeners: ['mousedown']
         })
     }
 
     toHTML() {
+        // добавляем количество строк 
         return createTable(20)
-}
-
-
-    onClick() {
-        console.log('click')
     }
 
     onMousedown(event) {
-        console.log('mousedown', event.target)
-    }
-
-    onMousemove() {
-        console.log('mousemove')
-    }
-
-    onMouseup() {
-        console.log('mouseup')
+        if (shouldResize(event)) {
+            resizeHendler(this.$root, event)
+        }
     }
 }
